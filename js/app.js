@@ -14,11 +14,14 @@ const priorityInput = document.getElementById('priority');
 const statusFilter = document.getElementById('statusFilter');
 const priorityFilter = document.getElementById('priorityFilter');
 const taskList = document.getElementById('taskList');
+const searchInput = document.getElementById('searchInput');
 
 const generateId = () => '_' + Math.random().toString(36).substr(2, 9);
+let editingTaskId = null;
+
 
 const renderTasks = () => {
-    const filteredTasks = getFilteredTasks(statusFilter.value, priorityFilter.value);
+    const filteredTasks = getFilteredTasks(statusFilter.value, priorityFilter.value, searchInput.value);
 
     taskList.innerHTML = '';
 
@@ -35,6 +38,7 @@ const renderTasks = () => {
             <button onclick="toggleTask('${task.id}')">${
             task.status === 'completed' ? 'Mark Active' : 'Mark Completed'
             }</button>
+            <button onclick="editTask('${task.id}')">Edit</button>
             <button onclick="removeTask('${task.id}')">Delete</button>
         </div>
         `;
@@ -79,6 +83,7 @@ taskForm.addEventListener('submit', (e) => {
 
 statusFilter.addEventListener('change', renderTasks);
 priorityFilter.addEventListener('change', renderTasks);
+searchInput.addEventListener('input', renderTasks);
 
 document.addEventListener('DOMContentLoaded', renderTasks);
 

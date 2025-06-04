@@ -13,21 +13,21 @@
     <header>
       <h1>Task Management Dashboard</h1>
     </header>
-    <section class="filters">
-      <h2>Filters</h2>
+    <section class="filters" aria-labelledby="filterHeading">
+      <h2  id="filterHeading">Filters</h2>
       
       <label for="searchInput">Search:</label>
-      <input type="text" id="searchInput" placeholder="Search tasks..." />
+      <input type="text" id="searchInput" placeholder="Search tasks..." aria-label="Search tasks by keyword"/>
 
       <label for="statusFilter">Status:</label>
-      <select id="statusFilter">
+      <select id="statusFilter" aria-label="Filter by task status">
         <option value="all">All</option>
         <option value="active">Active</option>
         <option value="completed">Completed</option>
       </select>
 
       <label for="priorityFilter">Priority:</label>
-      <select id="priorityFilter">
+      <select id="priorityFilter"  aria-label="Filter by priority">
         <option value="all">All</option>
         <option value="high">High</option>
         <option value="medium">Medium</option>
@@ -36,24 +36,24 @@
     </section>
     
     <main class="content">
-        <section class="left-section task-form">
+        <section class="left-section task-form" aria-labelledby="addTaskHeading">
       
             <h2>Add New Task</h2>
             <form id="taskForm">
-                <input type="text" id="title" placeholder="Title" required />
-                <textarea id="description" placeholder="Description" required></textarea>
-                <select id="priority" required>
+                <input type="text" id="title" placeholder="Title" required aria-label="Task title" />
+                <textarea id="description" placeholder="Description" required  aria-label="Task description"></textarea>
+                <select id="priority" required  aria-label="Select task priority">
                 <option value="">Select Priority</option>
                 <option value="high">High</option>
                 <option value="medium">Medium</option>
                 <option value="low">Low</option>
                 </select>
-                <button type="submit">Add Task</button>
+                <button type="submit" aria-label="Save task">Add Task</button>
             </form>
         </section>
-        <section class="right-section task-list">
+        <section class="right-section task-list" aria-labelledby="taskListHeading">
             <h2>Tasks</h2>
-            <ul id="taskList"></ul>
+            <ul id="taskList" aria-live="polite" aria-label="List of tasks"></ul>
         </section>
     </main>
     

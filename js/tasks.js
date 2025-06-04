@@ -34,19 +34,12 @@ export const toggleTaskStatus = (id) => {
   saveTasks(tasks);
 };
 
-export const getFilteredTasks = (status, priority) => {
-  return tasks.filter((task) => {
-    const statusMatch = status === 'all' || task.status === status;
-    const priorityMatch = priority === 'all' || task.priority === priority;
-    return statusMatch && priorityMatch;
+export const getFilteredTasks = (status, priority, keyword = '') => {
+  return getTasks().filter(task => {
+    const matchesStatus = status === 'all' || task.status === status;
+    const matchesPriority = priority === 'all' || task.priority === priority;
+    const matchesSearch = task.title.toLowerCase().includes(keyword.toLowerCase()) ||
+                          task.description.toLowerCase().includes(keyword.toLowerCase());
+    return matchesStatus && matchesPriority && matchesSearch;
   });
 };
-
-// export const getSearchedTasks=(seatchText, taskList)=>{
-//     return taskList.filter(task => {
-//     return (
-//       task.title.toLowerCase().includes(seatchText) ||
-//       task.description.toLowerCase().includes(seatchText)
-//     );
-//   });
-// };

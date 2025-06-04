@@ -22,7 +22,7 @@ I approached this project by first planning the core structure, splitting the co
 #### Core Features
 
 1. **Task Display**
-   - The tasks are shown as list items in the <ul> tag with classes based on their priority and status. Each task includes title, description, priority, status, and action buttons.
+   - The tasks are shown as list items in the `<ul>` tag with classes based on their priority and status. Each task includes title, description, priority, status, and action buttons.
    - I used CSS to color code tasks by priority and added conditional styling for completed tasks like strike through on buttons.
    - I avoided unnecessary reflows by using innerHTML batch updates for rendering.
 

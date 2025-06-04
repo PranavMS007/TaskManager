@@ -56,6 +56,10 @@ window.removeTask = (id) => {
   deleteTask(id);
   renderTasks();
 };
+window.editTask = (id) => {
+  editTask(id);
+  renderTasks();
+};
 
 taskForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -66,20 +70,46 @@ taskForm.addEventListener('submit', (e) => {
 
   if (!title || !description || !priority) return;
 
-  const newTask = {
-    id: generateId(),
-    title,
-    description,
-    priority,
-    status: 'active',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  };
+  
+  if (editingTaskId) {
+    const updatedTask = {
+      id: editingTaskId,
+      title,
+      description,
+      priority,
+      status: 'active',
+      updatedAt: new Date().toISOString(),
+    };
+    updateTask(updatedTask);
+    editingTaskId = null;
+  } else {
+    const newTask = {
+      id: generateId(),
+      title,
+      description,
+      priority,
+      status: 'active',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+    addTask(newTask);
+  }
 
-  addTask(newTask);
   taskForm.reset();
   renderTasks();
 });
+
+const editTask = (id) => {
+  const task = getTasks().find(t => t.id === id);
+  if (!task) return;
+
+  document.getElementById('title').value = task.title;
+  document.getElementById('description').value = task.description;
+  document.getElementById('priority').value = task.priority;
+
+  editingTaskId = id;
+  taskForm.scrollIntoView({ behavior: 'smooth' });
+};
 
 statusFilter.addEventListener('change', renderTasks);
 priorityFilter.addEventListener('change', renderTasks);
